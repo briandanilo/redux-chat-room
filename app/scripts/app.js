@@ -12,46 +12,37 @@ export default function app() {
         state = initialState;
 
       switch (action.type){
-        case "TESTING":
-          console.log("it works. state ",state);
+        case "VISITOR_ARRIVES":
+          views.welcomeVisitor();
           return state
-        case "ADD_ITEM":
-          var i = state.items.slice();
-          i.push(action.item)
-          return Object.assign(state,{items:i})
-        case "REMOVE_ITEM":
-          var i = state.items.slice();
-          i.splice(action.index,1)
-          return Object.assign(state,{items:i})
-        case "READ_ENTIRE_DB":
-          server.getAll();
+        case "LOGIN_ATTEMPT":
+          views.welcomeUser(action);
+          server.getChatHistory();
+          state.username = action.username;
           return state
-        case "UPDATE_CHAT_HISTORY":
-          console.log("state ",state);
-          console.log("action ",action.history)
+        case "REQUEST_CHAT_HISTORY_DATA":
+          server.getChatHistory();
+          return state
+        case "UPDATE_CHAT_HISTORY_VIEW":
           state.history = action.history;
-          console.log("send ",state.history)
-          $('#chatHistory').html(views.showChatHistory(state.history));
-          console.log("new state ",state)
+          $('#chatHistory').html(views.showChatHistory(state));
           return state
+        case "SUBMIT_NEW_CHAT":
+          server.postToServer(state,action)
+          return state
+        case "DELETE_CHAT_BY_ID":
+          console.log("deleting ",action.idToDelete)
+          server.deleteChatById(action.idToDelete)
+          return state;
         default:
           return state
       }
-
     }
 
     const store = createStore(storeDispatchProcessor);
     const server = new Server(store)
     const views = new Views(store)
 
-    store.dispatch({ type: "TESTING" })
-    store.dispatch({ type: "ADD_ITEM", item: 'apples' })
-    store.dispatch({ type: "ADD_ITEM", item: 'oranges' })
-    store.dispatch({ type: "TESTING" })
-    store.dispatch({ type: "REMOVE_ITEM", index: 1})
-    store.dispatch({ type: "TESTING" })
-    store.dispatch({ type: "READ_ENTIRE_DB" })
-    //store.dispatch({ type: "UPDATE_CHAT_HISTORY" })
+    store.dispatch({ type: "VISITOR_ARRIVES" })
 
-    //api.sayHi();
 }

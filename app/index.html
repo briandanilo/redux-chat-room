@@ -3,15 +3,38 @@
   <head>
     <meta charset="utf-8">
     <title>Change Me</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <section id="app">
+
+    <section id="welcome-banner">
       <!-- All HTML placed here will be erased when the app is running -->
     </section>
-    <section id="chatHistory">
-      <!-- All HTML placed here will be erased when the app is running -->
+
+    <section id="login">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="USERNAME" id="username-form">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" id="login-btn">SUBMIT</button>
+        </span>
+      </div><!-- /input-group -->   <!-- All HTML placed here will be erased when the app is running -->
     </section>
+
+    <section id="chat">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Troll here" id="chat-form">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" id="chat-btn">SUBMIT</button>
+        </span>
+      </div><!-- /input-group -->   <!-- All HTML placed here will be erased when the app is running -->
+    </section>
+
+
+    <ul class="list-group" id="chatHistory">
+      <!-- All HTML placed here will be erased when the app is running -->
+    </ul>
+
     <script src="./app.js"></script>
   </body>
 </html>
