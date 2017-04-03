@@ -45,4 +45,6 @@ export default function app() {
 
     store.dispatch({ type: "VISITOR_ARRIVES" })
 
+    setInterval(server.getChatHistory,2000);
+
 }
